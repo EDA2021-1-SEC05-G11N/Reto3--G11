@@ -27,7 +27,8 @@
 
 import config as cf
 from DISClib.ADT import list as lt
-from DISClib.ADT import map as mp
+from DISClib.ADT import orderedmap as om
+from DISClib.ADT import map as m
 from DISClib.DataStructures import mapentry as me
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
@@ -39,12 +40,79 @@ los mismos.
 
 # Construccion de modelos
 
+def newAnalyzer():
+    analyzer = {'user_track': None,
+                'context': None,
+                "sentiment":None
+                }
+    analyzer['user_track'] = om.newMap(omaptype='RBT',
+                                      comparefunction=compareDates)
+    analyzer['context'] = om.newMap(omaptype='RBT',
+                                      comparefunction=compareDates)
+    analyzer['sentiment'] = om.newMap(omaptype='RBT',
+                                      comparefunction=compareDates)
+    return analyzer
+
+
+
 # Funciones para agregar informacion al catalogo
+def agregarsentimentfile(analyzer,sentiment):
+    mapa = analyzer["sentiment"]
+    hashtag = sentiment["hashtag"]
+    om.put(mapa,hashtag,sentiment)
+def agregarcontextfile(analyzer,context):
+    mapa = analyzer["context"]
+    track_id = context["track_id"]
+    om.put(mapa,track_id,context)
+
+def agregaruser_trackfile(analyzer,track):
+    mapa= analyzer["user_track"]
+    user_id = track["user_id"]
+    om.put(mapa,user_id,track)
+    
+
+    
+
+
+
+
 
 # Funciones para creacion de datos
 
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+def compareIds(id1, id2):
+    
+    if (id1 == id2):
+        return 0
+    elif id1 > id2:
+        return 1
+    else:
+        return -1
+def compareDates(date1, date2):
+    """
+    Compara dos fechas
+    """
+    if (date1 == date2):
+        return 0
+    elif (date1 > date2):
+        return 1
+    else:
+        return -1
+
+def compareOffenses(offense1, offense2):
+    """
+    Compara dos tipos de crimenes
+    """
+    offense = me.getKey(offense2)
+    if (offense1 == offense):
+        return 0
+    elif (offense1 > offense):
+        return 1
+    else:
+        return -1
+
 
 # Funciones de ordenamiento

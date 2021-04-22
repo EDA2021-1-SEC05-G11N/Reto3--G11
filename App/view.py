@@ -34,10 +34,16 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
+user_track="user_track_hashtag_timestamp-small.csv"
+context="context_content_features-small.csv"
+sentiment = "sentiment_values.csv"
+
+cont = None
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("1- Inicializar Analizador")
+    print("2- Cargar información en el catálogo")
+    print("3- ")
 
 catalog = None
 
@@ -48,10 +54,15 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        print("Cargando información de los archivos ....")
+        print("\nInicializando....")
+        # cont es el controlador que se usará de acá en adelante
+        cont = controller.iniciar()
 
     elif int(inputs[0]) == 2:
-        pass
+        print("\nCargando información de canciones ....")
+        controller.loadData(cont, context,sentiment,user_track)
+        
+        
 
     else:
         sys.exit(0)

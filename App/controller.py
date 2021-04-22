@@ -31,7 +31,46 @@ El controlador se encarga de mediar entre la vista y el modelo.
 
 # Inicialización del Catálogo de libros
 
+def iniciar():
+    """
+    Llama la funcion de inicializacion  del modelo.
+    """
+    # catalog es utilizado para interactuar con el model
+    p = model.newAnalyzer()
+    return p
 # Funciones para la carga de datos
+def loadData(analyzer, context,sentiment,user_track):
+    """
+    Carga los datos de los archivos CSV en el modelo
+    """
+    user_trackfile = cf.data_dir + user_track
+    contextfile= cf.data_dir + context
+    sentimentfile =  cf.data_dir + sentiment
+
+    input_file_user_trackfile = csv.DictReader(open(user_trackfile, encoding="utf-8"),
+                                delimiter=",")
+    input_file_contextfile = csv.DictReader(open(contextfile, encoding="utf-8"),
+                                delimiter=",")
+    input_file_sentimentfile = csv.DictReader(open(sentimentfile, encoding="utf-8"),
+                                delimiter=",")
+
+    for songs in input_file_sentimentfile:
+        loadsentimentfile(analyzer,songs)
+    for songs in input_file_contextfile:
+        loadcontextfile(analyzer,songs)
+    for songs in input_file_user_trackfile:
+        loaduser_trackfile(analyzer,songs)
+        
+        
+    return analyzer
+
+
+def loadsentimentfile(mapa, sentiment):
+    model.agregarsentimentfile(mapa,sentiment)
+def loadcontextfile(mapa,context):
+    model.agregarcontextfile(mapa,context)
+def loaduser_trackfile(mapa,track):
+    model.agregaruser_trackfile(mapa,track)
 
 # Funciones de ordenamiento
 
