@@ -69,14 +69,31 @@ def agregaruser_trackfile(analyzer,track):
     mapa= analyzer["user_track"]
     user_id = track["user_id"]
     om.put(mapa,user_id,track)
+
+def artistSize(analyzer):
+    """
+    Número de artistas
+    """
+    return om.size(analyzer["user_track"])
+
+def registroSize(analyzer):
+    return om.size(analyzer["user_track"])
+
+def tracksize(analyzer):
+    return om.size(analyzer["context"])
+
+def indexHeight(analyzer):
+    """
+    Altura del arbol
+    """
+    return om.height(analyzer["user_track"])
+
+def indexSize(analyzer):
+    """
+    Numero de elementos en el indice
+    """
+    return om.size(analyzer['user_track'])
     
-
-    
-
-
-
-
-
 # Funciones para creacion de datos
 
 # Funciones de consulta

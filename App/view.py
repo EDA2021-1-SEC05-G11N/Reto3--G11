@@ -61,7 +61,12 @@ while True:
     elif int(inputs[0]) == 2:
         print("\nCargando información de canciones ....")
         controller.loadData(cont, context,sentiment,user_track)
-        
+        print('registros de eventos de escucha cargados: ' + str(controller.registroSize(cont)))
+        print('artistas cargados: ' + str(controller.artistSize(cont)))
+        print('canciones cargadas: ' + str(controller.tracksize(cont)))
+        print('Altura del arbol: ' + str(controller.indexHeight(cont)))
+        print('Elementos en el arbol: ' + str(controller.indexSize(cont)))
+
         
 
     else:

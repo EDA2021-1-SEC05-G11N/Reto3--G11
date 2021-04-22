@@ -75,3 +75,27 @@ def loaduser_trackfile(mapa,track):
 # Funciones de ordenamiento
 
 # Funciones de consulta sobre el catálogo
+
+def artistSize(analyzer):
+    """
+    Numero de artistas leidos
+    """
+    return model.artistSize(analyzer)
+
+def registroSize(analyzer):
+    return model.registroSize(analyzer)
+
+def tracksize(analyzer):
+    return model.tracksize(analyzer)
+
+def indexHeight(analyzer):
+    """
+    Altura del indice (arbol)
+    """
+    return model.indexHeight(analyzer)
+
+def indexSize(analyzer):
+    """
+    Numero de nodos en el arbol
+    """
+    return model.indexSize(analyzer)
