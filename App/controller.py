@@ -99,3 +99,15 @@ def indexSize(analyzer):
     Numero de nodos en el arbol
     """
     return model.indexSize(analyzer)
+
+def caracterizar(caracteristica,valor_minimo,valor_maximo,mapa):
+    return model.caracterizar(caracteristica,valor_minimo,valor_maximo,mapa)
+
+def musica_festejar(valor_min_energy,valor_max_energy,valor_min_Danceability,valor_max_Danceability,mapa):
+    return model.musica_festejar(valor_min_energy,valor_max_energy,valor_min_Danceability,valor_max_Danceability,mapa)
+def musica_estudiar(valor_min_instrumentalness,valor_max_instrumentalness,valor_min_tempo,valor_max_tempo,mapa):
+    return model.musica_estudiar(valor_min_instrumentalness,valor_max_instrumentalness,valor_min_tempo,valor_max_tempo,mapa)
+def encontrar_genero(lista_genero,centinela,generos_usuario,mapa):
+    return model.encontrar_genero(lista_genero,centinela,generos_usuario,mapa)
+def saber_tempo_genero(genero):
+    return model.saber_tempo_genero(genero)
