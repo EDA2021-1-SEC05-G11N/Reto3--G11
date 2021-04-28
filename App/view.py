@@ -150,6 +150,9 @@ while True:
             print("artista 9: {0}".format(respuesta[h][8]))
             print("artista 10: {0}".format(respuesta[h][9]))
         
+    elif int(inputs[0]) == 7:
+        controller.por_horas(cont)
+
     else:
         sys.exit(0)
 sys.exit(0)

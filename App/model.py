@@ -111,7 +111,7 @@ def caracterizar(caracteristica,valor_minimo,valor_maximo,mapa):
         x=lt.getElement(lst,p) #contiene un diccionario
         if caracteristica in llaves: #verifica si la llave que introducimos es valida 
             if (x[caracteristica] <= valor_maximo) and  (x[caracteristica] >= valor_minimo): #verifica si cumplen con las condiciones
-                canciones+=1 #si cumple con las condiciones sube la cantidad de canciones 
+                canciones+=1 #si cumple con las condiaciones sube la cantidad de canciones 
                 if x["artist_id"] not in artistas:
                     artistas.append(x["artist_id"]) #en caso de que el id del artista no este en la lista lo agrega
         else: #en caso de que no sea valida muestra este mensaje
@@ -229,6 +229,29 @@ def saber_tempo_genero(genero):
     if genero in diccionario_generos:
         respuesta=diccionario_generos[genero]
     return respuesta
+
+def por_horas(mapa,hora_min,hora_max):
+    p=0
+    lst = om.valueSet(mapa["context"]) #saca todos los valores de context en una lista
+    o=0
+    y=len(hora_min)
+    g=len(hora_max)
+    if len(hora_min) != 6:
+        while y=len(hora_min) < 7:
+            o+=1
+            hora_min+= "0"
+            y+=1
+
+    #while p < lt.size(lst): #recorrecomos los diccionarios dentro de lst
+    #    x=lt.getElement(lst,p) #contiene un diccionario
+    #    k=x["created_at"])
+    #    j=k.split(' ')
+    #    o=j[1].split(':')
+    #    centinela=""
+    #    for i in o:
+    #        centinela+=i
+
+    #    p+=1
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def compareIds(id1, id2):
