@@ -111,5 +111,5 @@ def encontrar_genero(lista_genero,centinela,generos_usuario,mapa):
     return model.encontrar_genero(lista_genero,centinela,generos_usuario,mapa)
 def saber_tempo_genero(genero):
     return model.saber_tempo_genero(genero)
-def por_horas(map):
-    model.por_horas(map)
+def por_horas(mapa,hora_min,hora_max):
+    model.por_horas(mapa,hora_min,hora_max)

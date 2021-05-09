@@ -105,20 +105,20 @@ def caracterizar(caracteristica,valor_minimo,valor_maximo,mapa):
     lst = om.valueSet(mapa["context"]) #saca todos los valores de context en una lista
     p=0 # centinela para recorrer lst
     canciones=0 #centinela para saber el numero de canciones que cumplen los requisitos
-    artistas= [] # se creo una lista nueva para almacenar los artistas
+    artistas = lt.newList(datastructure='SINGLE_LINKED')
     llaves = ["instrumentalness","liveness","speechiness","danceability","valence","loudness","tempo","acousticness","energy","mode","key","artist_id","tweet_lang","track_id","created_at","lang","time_zone","user_id","id"] #lista sobre las caracteristicas posibles
     while p < lt.size(lst): #recorrecomos los diccionarios dentro de lst
         x=lt.getElement(lst,p) #contiene un diccionario
         if caracteristica in llaves: #verifica si la llave que introducimos es valida 
             if (x[caracteristica] <= valor_maximo) and  (x[caracteristica] >= valor_minimo): #verifica si cumplen con las condiciones
                 canciones+=1 #si cumple con las condiaciones sube la cantidad de canciones 
-                if x["artist_id"] not in artistas:
-                    artistas.append(x["artist_id"]) #en caso de que el id del artista no este en la lista lo agrega
+                if lt.isNotPresent(artistas,x["artist_id"]):
+                    lt.addLast(artistas,x["artist_id"]) #en caso de que el id del artista no este en la lista lo agrega
         else: #en caso de que no sea valida muestra este mensaje
             print("no incluyo una caracteristica valida")
             break
         p+=1
-    return (len(artistas),canciones)
+    return (lt.size(artistas),canciones)
     
 def musica_festejar(valor_min_energy,valor_max_energy,valor_min_Danceability,valor_max_Danceability,mapa):
     lst = om.valueSet(mapa["context"]) #saca todos los valores de context en una lista
@@ -232,26 +232,35 @@ def saber_tempo_genero(genero):
 
 def por_horas(mapa,hora_min,hora_max):
     p=0
+    user_track = om.valueSet(mapa["user_track"]) #saca todos los valores de user_track en una lista
     lst = om.valueSet(mapa["context"]) #saca todos los valores de context en una lista
+    sentiment = om.valueSet(mapa["sentiment"]) #saca todos los valores de sentiment en una lista
     o=0
+    hora_min = hora_min.replace(":","")
+    hora_max = hora_max.replace(":","")
     y=len(hora_min)
     g=len(hora_max)
-    if len(hora_min) != 6:
-        while y=len(hora_min) < 7:
+    trackId = []
+    generos = {}
+    hasta = {}
+    etiquetas = {} #almacenara las etiquetas de las canciones
+    ayuda = 0
+    z = 0
+    b = 0
+    art_has = {} #almacenara los artistas y sus hashtag
+    canci = []
+    genero_fav = "" #almacenara el genero que mas se repite en las horas
+    if len(hora_min) != 6: #en caso de que no se coloque la hora completa se completara con 0
+        while len(hora_min) < 6:
             o+=1
             hora_min+= "0"
             y+=1
-
-    #while p < lt.size(lst): #recorrecomos los diccionarios dentro de lst
-    #    x=lt.getElement(lst,p) #contiene un diccionario
-    #    k=x["created_at"])
-    #    j=k.split(' ')
-    #    o=j[1].split(':')
-    #    centinela=""
-    #    for i in o:
-    #        centinela+=i
-
-    #    p+=1
+    if len(hora_max) != 6:
+        while len(hora_max) < 6: #en caso de que no se coloque la hora completa se completara con 0
+            o+=1
+            hora_max+= "0"
+            y+=1
+    
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def compareIds(id1, id2):
@@ -285,3 +294,29 @@ def compareOffenses(offense1, offense2):
 
 
 # Funciones de ordenamiento
+
+#funciones de apoyo
+
+def saber_genero_by(tempo):
+    genero = "sin genero"
+    diccionario_generos={"Reggae":[60,90],"Down-tempo":[70,100],"Chill-out":[90,120],"Hip-hop":[85,115],"Jazz and Funk":[120,125],"Pop":[100,130],"R&B":[60,70],"Rock":[110,140],"Metal":[100,160]}
+    for i in diccionario_generos:
+        x= diccionario_generos[i]
+        if (float(tempo) >= float(x[0])) and (float(tempo) <= float(x[1])):
+            genero = i
+            break
+    return genero
+
+def avg_promedio(hasta,x):
+    b=0
+    while b < len(x):
+        print(x[b])
+        b+=1
+
+def completar_0(hora):
+    respuesta = hora
+    if len(respuesta) != 6: #en caso de que no se coloque la hora completa se completara con 0
+        while len(hora_min) < 6:
+            o+=1
+            respuesta+= "0"
+            y+=1

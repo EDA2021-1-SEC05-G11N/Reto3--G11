@@ -151,7 +151,9 @@ while True:
             print("artista 10: {0}".format(respuesta[h][9]))
         
     elif int(inputs[0]) == 7:
-        controller.por_horas(cont)
+        hora_min = "0930"
+        hora_max = "10:30"
+        controller.por_horas(cont,hora_min,hora_max)
 
     else:
         sys.exit(0)

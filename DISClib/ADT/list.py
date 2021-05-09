@@ -307,6 +307,19 @@ def isPresent(lst, element):
         error.reraise(exp, 'TADList->isPresent: ')
 
 
+def isNotPresent(lst,elem):
+    size = lt.size(lst)
+    respuesta = True
+    p=0
+    while p < lt.size(lst):
+        x=lt.getElement(lst,p)
+        
+        if str(x) == str(elem):
+            respuesta=False
+            break
+        p+=1
+    return respuesta
+
 def exchange(lst, pos1, pos2):
     """ Intercambia la informacion en las posiciones pos1 y pos2 de la lista.
 
